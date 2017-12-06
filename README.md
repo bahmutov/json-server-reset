@@ -7,6 +7,7 @@
 [![Build status][ci-image] ][ci-url]
 [![semantic-release][semantic-image] ][semantic-url]
 [![js-standard-style][standard-image]][standard-url]
+[![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://cypress.io)
 
 ## Install
 
