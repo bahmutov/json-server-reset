@@ -22,7 +22,7 @@ If you are using [json-server](https://github.com/typicode/json-server), add thi
 
 ```json
 {
-  todos: []
+  "todos": []
 }
 ```
 
