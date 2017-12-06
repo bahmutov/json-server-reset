@@ -18,6 +18,56 @@ npm install --save json-server-reset
 
 ## Use
 
+If you are using [json-server](https://github.com/typicode/json-server), add this module as a middleware. For example, imagine our data file to be `data.json` with the following resources
+
+```json
+{
+  todos: []
+}
+```
+
+Then load the file and this middleware
+
+```
+json-server data.json --middlewares ./node_modules/json-server-reset
+```
+
+Then you can work with "todos" and reset the datastore (I am using [httpie](https://httpie.org/) client in this examples)
+
+```
+$ http :3000/todos
+[]
+$ http POST :3000/todos text="do something"
+{
+    "id": 1,
+    "text": "do something"
+}
+$ http POST :3000/todos text="do something else"
+{
+    "id": 2,
+    "text": "do something else"
+}
+$ http :3000/todos
+[
+    {
+        "id": 1,
+        "text": "do something"
+    },
+    {
+        "id": 2,
+        "text": "do something else"
+    }
+]
+```
+
+Now reset the database back to the initial empty list of todos. Note `:=` syntax to send the JSON as a list, not as a string.
+
+```
+$ http POST :3000/reset todos:=[]
+$ http :3000/todos
+[]
+```
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2017
