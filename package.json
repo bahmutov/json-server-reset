@@ -54,7 +54,7 @@
     "issues": "git-issues",
     "license": "license-checker --production --onlyunknown --csv",
     "lint": "standard --verbose --fix src/*.js",
-    "prelint": "npm run pretty",
+    "prelint": "echo disabled npm run pretty",
     "pretest": "npm run lint",
     "pretty": "prettier-standard 'src/*.js'",
     "secure": "nsp check",
