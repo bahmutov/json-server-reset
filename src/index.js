@@ -1,3 +1,5 @@
+const debug = require('debug')('json-server-reset')
+
 // adds /reset route to your json-server
 // to use execute POST /reset <JSON state>
 // for example using httpie
@@ -8,7 +10,10 @@ function jsonServerReset (req, res, next) {
     // TODO it would be nice to restore not with an empty object
     // but with the initial database
     const data = req.body || {}
-    return req.app.db.setState(data).then(() => res.status(200).end())
+    debug('new data %o', data)
+
+    req.app.db.setState(data)
+    return res.sendStatus(200)
   }
   // not a POST /reset
   next()
