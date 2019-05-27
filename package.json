@@ -63,7 +63,7 @@
     "cy:run": "cypress run",
     "start": "json-server cypress/fixtures/data.json --middlewares ./src/index.js",
     "e2e": "start-server-and-test start http://localhost:3000 cy:run",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.9.2",
@@ -79,7 +79,7 @@
     "mocha": "4.0.1",
     "pre-git": "3.16.0",
     "prettier-standard": "7.0.3",
-    "semantic-release": "8.2.0",
+    "semantic-release": "^15.13.12",
     "standard": "10.0.3",
     "start-server-and-test": "1.0.0"
   }
