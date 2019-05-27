@@ -12,7 +12,7 @@
 
 ## Install
 
-Requires [Node](https://nodejs.org/en/) version 6 or above.
+Requires [Node](https://nodejs.org/en/) version 8 or above (because of `json-server@0.15` peer dependency).
 
 ```sh
 npm install --save json-server-reset
@@ -68,6 +68,14 @@ Now reset the database back to the initial empty list of todos. Note `:=` syntax
 $ http POST :3000/reset todos:=[]
 $ http :3000/todos
 []
+```
+
+### Debugging
+
+Run this module with environment variable
+
+```
+DEBUG=json-server-reset
 ```
 
 ### Small print
