@@ -82,8 +82,5 @@
     "semantic-release": "8.2.0",
     "standard": "10.0.3",
     "start-server-and-test": "1.0.0"
-  },
-  "release": {
-    "generateNotes": "github-post-release"
   }
 }
