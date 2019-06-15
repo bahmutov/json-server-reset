@@ -58,7 +58,7 @@
     "license-checker": "15.0.0",
     "mocha": "4.1.0",
     "prettier-standard": "7.0.3",
-    "semantic-release": "15.13.12",
+    "semantic-release": "15.13.16",
     "standard": "12.0.1",
     "start-server-and-test": "1.9.1"
   },
