@@ -78,6 +78,30 @@ Run this module with environment variable
 DEBUG=json-server-reset
 ```
 
+### Using in your own server
+
+If you want to use `json-server-reset` when building your own server that includes `json-server`, make sure the to initialize it by passing `json-server` reference and router database reference, and to add `body-parser` middleware before the reset. This middleware is included with `json-server`
+
+Then set it to be the middleware _before_ the rest of the `json-server` middlewares.
+
+```js
+const jsonServer = require('json-server')
+const reset = require('json-server-reset')
+const setApp = require('json-server-reset/src/set-app')
+const bodyParser = require('json-server/lib/server/body-parser')
+
+// create json server and its router first
+const server = jsonServer.create()
+const router = jsonServer.router(db)
+// then pass it to json-server-reset
+server.use(setApp(server, router.db))
+server.use(bodyParser)
+server.use(reset)
+// the rest of middlewares
+server.use(jsonServer.defaults())
+server.use(router)
+```
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2017
