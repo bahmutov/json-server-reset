@@ -43,7 +43,8 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "start": "json-server cypress/fixtures/data.json --middlewares ./src/index.js",
-    "e2e": "start-server-and-test start http://localhost:3000 cy:run",
+    "e2e": "start-server-and-test 3000 cy:run",
+    "dev": "start-server-and-test 3000 cy:open",
     "semantic-release": "semantic-release"
   },
   "devDependencies": {

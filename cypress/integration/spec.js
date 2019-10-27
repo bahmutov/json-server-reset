@@ -38,4 +38,18 @@ describe('json-server-reset', () => {
     reset()
     getTodos().should('deep.equal', [])
   })
+
+  it('immediately saves DB file', () => {
+    cy.readFile('cypress/fixtures/data.json').should('deep.equal', {
+      todos: []
+    })
+    addTodo()
+    cy.readFile('cypress/fixtures/data.json').should('deep.equal', {
+      todos: [{ id: 1, title: 'do something' }]
+    })
+    reset()
+    cy.readFile('cypress/fixtures/data.json').should('deep.equal', {
+      todos: []
+    })
+  })
 })
