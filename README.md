@@ -102,6 +102,11 @@ server.use(jsonServer.defaults())
 server.use(router)
 ```
 
+## Examples
+
+- [Cypress basics workshop](https://github.com/bahmutov/cypress-workshop-basics)
+- [Testing app example](https://github.com/bahmutov/testing-app-example)
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2017
