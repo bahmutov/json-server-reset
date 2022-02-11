@@ -12,6 +12,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           build: npm test
+          start: npm start
 
       - name: Semantic Release 🚀
         uses: cycjimmy/semantic-release-action@v2
