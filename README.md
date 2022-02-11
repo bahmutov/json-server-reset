@@ -1,4 +1,4 @@
-# json-server-reset
+# json-server-reset ![json-server version](https://img.shields.io/badge/json--server-0.16.3-brightgreen) ![cypress version](https://img.shields.io/badge/cypress-3.8.3-brightgreen)
 
 > Reset middleware for json-server
 
