@@ -64,7 +64,7 @@
     "start-server-and-test": "1.14.0"
   },
   "dependencies": {
-    "debug": "4.3.3"
+    "debug": "4.3.4"
   },
   "peerDependencies": {
     "json-server": ">=0.15"
