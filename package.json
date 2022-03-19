@@ -48,7 +48,7 @@
     "semantic-release": "semantic-release"
   },
   "devDependencies": {
-    "ban-sensitive-files": "1.9.17",
+    "ban-sensitive-files": "1.9.18",
     "check-more-types": "2.24.0",
     "cypress": "9.5.2",
     "dependency-check": "4.1.0",
