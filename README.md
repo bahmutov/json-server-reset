@@ -87,20 +87,21 @@ Then set it to be the middleware _before_ the rest of the `json-server` middlewa
 ```js
 const jsonServer = require('json-server')
 const reset = require('json-server-reset')
-const setApp = require('json-server-reset/src/set-app')
-const bodyParser = require('json-server/lib/server/body-parser')
 
 // create json server and its router first
 const server = jsonServer.create()
-const router = jsonServer.router(db)
-// then pass it to json-server-reset
-server.use(setApp(server, router.db))
-server.use(bodyParser)
+const router = jsonServer.router(dataFilename)
+server.use(jsonServer.defaults({
+  static: '.', // optional static server folder
+  bodyParser: true,
+  readOnly: false
+}))
 server.use(reset)
-// the rest of middlewares
-server.use(jsonServer.defaults())
+server.db = router.db
 server.use(router)
 ```
+
+See [example-server.js](./cypress/fixtures/example-server.js)
 
 ## Examples
 

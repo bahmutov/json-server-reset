@@ -1,6 +1,5 @@
 const jsonServer = require('json-server')
 const reset = require('../..')
-const setApp = require('../../src/set-app')
 const path = require('path')
 const dataFilename = path.join(__dirname, 'data.json')
 
@@ -12,8 +11,7 @@ server.use(jsonServer.defaults({
   readOnly: false
 }))
 server.use(reset)
-// then pass it to json-server-reset
-server.use(setApp(server, router.db))
+server.db = router.db
 server.use(router)
 
 server.listen(4000, () => {
