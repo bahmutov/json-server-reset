@@ -5,14 +5,22 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout 🛎
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Run tests 🧪
         # https://github.com/cypress-io/github-action
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
           build: npm test
           start: npm start
+
+      - name: Run JSON server tests 🧪
+        uses: cypress-io/github-action@v4
+        with:
+          # we have already installed all dependencies above
+          install: false
+          start: node ./cypress/fixtures/example-server.js
+          config: 'baseUrl=http://localhost:4000'
 
       - name: Semantic Release 🚀
         uses: cycjimmy/semantic-release-action@v2

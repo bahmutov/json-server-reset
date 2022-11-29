@@ -1,5 +1,13 @@
 const debug = require('debug')('json-server-reset')
 
+function isEmptyObject (x) {
+  return typeof x === 'object' && Object.getOwnPropertyNames(x).length === 0
+}
+
+function arraysAreDifferent (list1, list2) {
+  return JSON.stringify(list1) !== JSON.stringify(list2)
+}
+
 // adds /reset route to your json-server
 // to use execute POST /reset <JSON state>
 // for example using httpie
@@ -10,14 +18,38 @@ function jsonServerReset (req, res, next) {
     // TODO it would be nice to restore not with an empty object
     // but with the initial database
     const data = req.body || {}
+    if (isEmptyObject(data)) {
+      console.error('Resetting with an empty object not allowed')
+      return res.sendStatus(400)
+    }
+    if (Array.isArray(data)) {
+      console.error('Resetting with an array not allowed')
+      return res.sendStatus(400)
+    }
+
     debug('new data %o', data)
+
+    const currentKeys = Object.keys(req.app.db.getState()).sort()
+    const newKeys = Object.keys(data).sort()
+    debug('existing REST keys %o', currentKeys)
+    debug('new REST keys %o', newKeys)
+    if (arraysAreDifferent(currentKeys, newKeys)) {
+      console.warn('⚠️ Resetting REST endpoints %s with %s',
+        JSON.stringify(currentKeys), JSON.stringify(newKeys))
+    }
 
     req.app.db.setState(data)
     // and immediately write the database file
-    req.app.db.write()
-    debug('have written updated data to disk')
-
-    return res.sendStatus(200)
+    const p = req.app.db.write()
+    if (p && p.then) {
+      return p.then(() => {
+        debug('have async written updated data to disk')
+        return res.sendStatus(200)
+      })
+    } else {
+      debug('have sync written updated data to disk')
+      return res.sendStatus(200)
+    }
   }
   // not a POST /reset
   next()

@@ -52,4 +52,37 @@ describe('json-server-reset', () => {
       todos: []
     })
   })
+
+  context('invalid input', () => {
+    it('warns when resetting with non-existing keys', () => {
+      cy.request('POST', '/reset', { todos: [] })
+      cy.request('POST', '/reset', { people: [] })
+    })
+
+    it('rejects resetting with an empty object', () => {
+      cy.request({
+        method: 'POST',
+        url: '/reset',
+        body: {},
+        failOnStatusCode: false
+      }).its('status').should('equal', 400)
+    })
+
+    it('rejects resetting without an object', () => {
+      cy.request({
+        method: 'POST',
+        url: '/reset',
+        failOnStatusCode: false
+      }).its('status').should('equal', 400)
+    })
+
+    it('rejects resetting with an array', () => {
+      cy.request({
+        method: 'POST',
+        url: '/reset',
+        body: [],
+        failOnStatusCode: false
+      }).its('status').should('equal', 400)
+    })
+  })
 })
