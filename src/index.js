@@ -4,6 +4,10 @@ function isEmptyObject (x) {
   return typeof x === 'object' && Object.getOwnPropertyNames(x).length === 0
 }
 
+function arraysAreDifferent (list1, list2) {
+  return JSON.stringify(list1) !== JSON.stringify(list2)
+}
+
 // adds /reset route to your json-server
 // to use execute POST /reset <JSON state>
 // for example using httpie
@@ -25,12 +29,21 @@ function jsonServerReset (req, res, next) {
 
     debug('new data %o', data)
 
+    const currentKeys = Object.keys(req.app.db.getState()).sort()
+    const newKeys = Object.keys(data).sort()
+    debug('existing REST keys %o', currentKeys)
+    debug('new REST keys %o', newKeys)
+    if (arraysAreDifferent(currentKeys, newKeys)) {
+      console.warn('⚠️ Resetting REST endpoints %s with %s',
+        JSON.stringify(currentKeys), JSON.stringify(newKeys))
+    }
+
     req.app.db.setState(data)
     // and immediately write the database file
-    req.app.db.write()
-    debug('have written updated data to disk')
-
-    return res.sendStatus(200)
+    return req.app.db.write().then(() => {
+      debug('have written updated data to disk')
+      return res.sendStatus(200)
+    })
   }
   // not a POST /reset
   next()
