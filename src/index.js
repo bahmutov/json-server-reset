@@ -40,10 +40,16 @@ function jsonServerReset (req, res, next) {
 
     req.app.db.setState(data)
     // and immediately write the database file
-    return req.app.db.write().then(() => {
-      debug('have written updated data to disk')
+    const p = req.app.db.write()
+    if (p && p.then) {
+      return p.then(() => {
+        debug('have async written updated data to disk')
+        return res.sendStatus(200)
+      })
+    } else {
+      debug('have sync written updated data to disk')
       return res.sendStatus(200)
-    })
+    }
   }
   // not a POST /reset
   next()
