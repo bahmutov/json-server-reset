@@ -6,8 +6,8 @@ describe('json-server-reset', () => {
       method: 'POST',
       url: '/reset',
       body: {
-        todos: []
-      }
+        todos: [],
+      },
     })
   }
   beforeEach(reset)
@@ -20,8 +20,8 @@ describe('json-server-reset', () => {
       url: '/todos',
       body: {
         id: 1,
-        title: 'do something'
-      }
+        title: 'do something',
+      },
     })
 
   it('starts with empty list of todos', () => {
@@ -41,15 +41,15 @@ describe('json-server-reset', () => {
 
   it('immediately saves DB file', () => {
     cy.readFile('cypress/fixtures/data.json').should('deep.equal', {
-      todos: []
+      todos: [],
     })
     addTodo()
     cy.readFile('cypress/fixtures/data.json').should('deep.equal', {
-      todos: [{ id: 1, title: 'do something' }]
+      todos: [{ id: 1, title: 'do something' }],
     })
     reset()
     cy.readFile('cypress/fixtures/data.json').should('deep.equal', {
-      todos: []
+      todos: [],
     })
   })
 
@@ -64,16 +64,20 @@ describe('json-server-reset', () => {
         method: 'POST',
         url: '/reset',
         body: {},
-        failOnStatusCode: false
-      }).its('status').should('equal', 400)
+        failOnStatusCode: false,
+      })
+        .its('status')
+        .should('equal', 400)
     })
 
     it('rejects resetting without an object', () => {
       cy.request({
         method: 'POST',
         url: '/reset',
-        failOnStatusCode: false
-      }).its('status').should('equal', 400)
+        failOnStatusCode: false,
+      })
+        .its('status')
+        .should('equal', 400)
     })
 
     it('rejects resetting with an array', () => {
@@ -81,8 +85,10 @@ describe('json-server-reset', () => {
         method: 'POST',
         url: '/reset',
         body: [],
-        failOnStatusCode: false
-      }).its('status').should('equal', 400)
+        failOnStatusCode: false,
+      })
+        .its('status')
+        .should('equal', 400)
     })
   })
 })

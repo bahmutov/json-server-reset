@@ -14,6 +14,9 @@ jobs:
           build: npm test
           start: npm start
 
+      - name: Restore the data
+        run: git checkout ./cypress/fixtures/data.json
+
       - name: Run JSON server tests 🧪
         uses: cypress-io/github-action@v4
         with:
@@ -23,6 +26,7 @@ jobs:
           config: 'baseUrl=http://localhost:4000'
 
       - name: Semantic Release 🚀
+        if: github.ref == 'refs/heads/master'
         uses: cycjimmy/semantic-release-action@v2
         with:
           branch: master
