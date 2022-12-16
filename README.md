@@ -20,6 +20,8 @@ npm install --save json-server-reset
 
 ## Use
 
+### reset
+
 If you are using [json-server](https://github.com/typicode/json-server), add this module as a middleware. For example, imagine our data file to be `data.json` with the following resources
 
 ```json
@@ -70,6 +72,30 @@ $ http :3000/todos
 []
 ```
 
+### merge
+
+Instead of overwriting the entire database with new data, you can merge the existing data with a subset (by the top key).
+
+```
+// current data
+// { todos: [...], people: [...] }
+```
+
+Let's reset just the "people" resource list, leaving the todos unchanged. Include the [src/merge.js](./src/merge.js) middleware
+
+```
+json-server data.json --middlewares ./node_modules/json-server-reset --middlewares ./node_modules/json-server-reset/src/merge
+```
+
+Call the endpoint `POST /merge`
+
+```
+$ http POST :3000/merge people:=[]
+
+// updated data
+// { todos: [...], people: [] }
+```
+
 ### Debugging
 
 Run this module with environment variable
@@ -91,11 +117,13 @@ const reset = require('json-server-reset')
 // create json server and its router first
 const server = jsonServer.create()
 const router = jsonServer.router(dataFilename)
-server.use(jsonServer.defaults({
-  static: '.', // optional static server folder
-  bodyParser: true,
-  readOnly: false
-}))
+server.use(
+  jsonServer.defaults({
+    static: '.', // optional static server folder
+    bodyParser: true,
+    readOnly: false,
+  }),
+)
 server.use(reset)
 server.db = router.db
 server.use(router)
@@ -112,9 +140,9 @@ See [example-server.js](./cypress/fixtures/example-server.js)
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2017
 
-* [@bahmutov](https://twitter.com/bahmutov)
-* [glebbahmutov.com](https://glebbahmutov.com)
-* [blog](https://glebbahmutov.com/blog)
+- [@bahmutov](https://twitter.com/bahmutov)
+- [glebbahmutov.com](https://glebbahmutov.com)
+- [blog](https://glebbahmutov.com/blog)
 
 License: MIT - do anything with the code, but don't blame me if it does not work.
 
