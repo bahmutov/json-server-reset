@@ -15,7 +15,7 @@ jobs:
           start: npm start
 
       - name: Restore the data
-        run: cat ./cypress/fixtures/data.json
+        run: git checkout ./cypress/fixtures/data.json
 
       - name: Run JSON server tests 🧪
         uses: cypress-io/github-action@v4
