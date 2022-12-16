@@ -1,12 +1,5 @@
 const debug = require('debug')('json-server-reset')
-
-function isEmptyObject (x) {
-  return typeof x === 'object' && Object.getOwnPropertyNames(x).length === 0
-}
-
-function arraysAreDifferent (list1, list2) {
-  return JSON.stringify(list1) !== JSON.stringify(list2)
-}
+const { isEmptyObject, arraysAreDifferent } = require('./utils')
 
 // adds /reset route to your json-server
 // to use execute POST /reset <JSON state>

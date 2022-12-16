@@ -1,3 +1,18 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "id": 1,
+      "title": "first"
+    },
+    {
+      "id": 2,
+      "title": "second"
+    }
+  ],
+  "people": [
+    {
+      "name": "A person 5155",
+      "id": 1
+    }
+  ]
 }

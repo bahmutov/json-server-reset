@@ -32,10 +32,7 @@
     "deps": "deps-ok && dependency-check --no-dev .",
     "issues": "git-issues",
     "license": "license-checker --production --onlyunknown --csv",
-    "lint": "standard --verbose --fix src/*.js",
     "prelint": "echo disabled npm run pretty",
-    "pretest": "npm run lint",
-    "pretty": "prettier-standard 'src/*.js'",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
     "unit": "mocha src/*-spec.js",
@@ -45,9 +42,11 @@
     "cy:open:4000": "cypress open --config baseUrl=http://localhost:4000",
     "start": "json-server cypress/fixtures/data.json --middlewares ./src/index.js",
     "start:server": "node ./cypress/fixtures/example-server",
+    "start:merge": "node ./cypress/fixtures/merge-server",
     "e2e": "start-server-and-test 3000 cy:run",
     "dev": "start-server-and-test 3000 cy:open",
     "dev2": "start-test start:server 4000 cy:open:4000",
+    "dev:merge": "start-test start:merge 4000 cy:open:4000",
     "semantic-release": "semantic-release"
   },
   "devDependencies": {
@@ -61,9 +60,8 @@
     "lazy-ass": "1.6.0",
     "license-checker": "15.0.0",
     "mocha": "4.1.0",
-    "prettier-standard": "7.0.3",
+    "prettier": "2.8.1",
     "semantic-release": "19.0.5",
-    "standard": "12.0.1",
     "start-server-and-test": "1.15.2"
   },
   "dependencies": {
