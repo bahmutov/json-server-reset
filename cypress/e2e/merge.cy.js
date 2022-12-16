@@ -5,8 +5,8 @@ describe('json-server-reset', () => {
       url: '/reset',
       body: {
         todos: [],
-        people: []
-      }
+        people: [],
+      },
     })
   }
   beforeEach(reset)
@@ -23,8 +23,8 @@ describe('json-server-reset', () => {
       url: '/todos',
       body: {
         id: 1,
-        title: 'do something'
-      }
+        title: 'do something',
+      },
     })
 
   const addPerson = () =>
@@ -32,8 +32,8 @@ describe('json-server-reset', () => {
       method: 'POST',
       url: '/people',
       body: {
-        name: `A person ${Cypress._.random(1e4)}`
-      }
+        name: `A person ${Cypress._.random(1e4)}`,
+      },
     })
 
   it('updates people while keeping todos', () => {
@@ -50,15 +50,17 @@ describe('json-server-reset', () => {
     addTodo()
     getPeople().should('have.length', 1)
     getTodos().should('have.length', 1)
-    mergeTodos([{
-      id: 1,
-      title: 'first'
-  }, {
-    id: 2,
-    title: 'second'
-  }])
-  getPeople().should('have.length', 1)
+    mergeTodos([
+      {
+        id: 1,
+        title: 'first',
+      },
+      {
+        id: 2,
+        title: 'second',
+      },
+    ])
+    getPeople().should('have.length', 1)
     getTodos().should('have.length', 2)
   })
-
 })

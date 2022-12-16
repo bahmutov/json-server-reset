@@ -4,8 +4,8 @@ const { isEmptyObject } = require('./utils')
 /**
  * Merges the current list of top level resources
  * with the given one in the request body.
-*/
-function jsonServerMerge (req, res, next) {
+ */
+function jsonServerMerge(req, res, next) {
   if (req.method === 'POST' && req.path === '/merge') {
     console.log('merging database')
     // TODO it would be nice to restore not with an empty object

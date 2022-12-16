@@ -5,7 +5,7 @@ const { isEmptyObject, arraysAreDifferent } = require('./utils')
 // to use execute POST /reset <JSON state>
 // for example using httpie
 //   http localhost:3000/reset todos=[]
-function jsonServerReset (req, res, next) {
+function jsonServerReset(req, res, next) {
   if (req.method === 'POST' && req.path === '/reset') {
     console.log('resetting database')
     // TODO it would be nice to restore not with an empty object
@@ -27,8 +27,11 @@ function jsonServerReset (req, res, next) {
     debug('existing REST keys %o', currentKeys)
     debug('new REST keys %o', newKeys)
     if (arraysAreDifferent(currentKeys, newKeys)) {
-      console.warn('⚠️ Resetting REST endpoints %s with %s',
-        JSON.stringify(currentKeys), JSON.stringify(newKeys))
+      console.warn(
+        '⚠️ Resetting REST endpoints %s with %s',
+        JSON.stringify(currentKeys),
+        JSON.stringify(newKeys),
+      )
     }
 
     req.app.db.setState(data)
