@@ -1,7 +1,7 @@
 'use strict'
 
 /* eslint-env mocha */
-const la = require('lazy-ass')
+const { lazyAss: la } = require('lazy-ass')
 const is = require('check-more-types')
 const jsonServerReset = require('.')
 
