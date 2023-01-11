@@ -18,7 +18,7 @@ server.use(
 )
 
 // list of REST resources to clear on startup
-const clear = ['todos']
+const clear = ['todos', 'people']
 server.use(initJsonServerReset({ db: router.db, clear }))
 server.use(merge)
 server.db = router.db
