@@ -7,6 +7,9 @@ const dataFilename = path.join(__dirname, 'data.json')
 // create json server and its router first
 const server = jsonServer.create()
 const router = jsonServer.router(dataFilename)
+
+console.log('db', router.db.getState())
+
 server.use(
   jsonServer.defaults({
     bodyParser: true,
