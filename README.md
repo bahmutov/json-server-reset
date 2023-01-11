@@ -96,6 +96,19 @@ $ http POST :3000/merge people:=[]
 // { todos: [...], people: [] }
 ```
 
+## Init reset
+
+If using this middleware from your server, you can clear some resources on startup
+
+```js
+const initJsonServerReset = require('json-server-reset/src/init-reset')
+
+const router = jsonServer.router(dataFilename)
+// list of REST resources to clear on startup
+const clear = ['todos']
+server.use(initJsonServerReset({ db: router.db, clear }))
+```
+
 ### Debugging
 
 Run this module with environment variable
