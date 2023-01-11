@@ -1,5 +1,5 @@
 const jsonServer = require('json-server')
-const reset = require('../../src')
+const initJsonServerReset = require('../../src/init-reset')
 const merge = require('../../src/merge')
 const path = require('path')
 const dataFilename = path.join(__dirname, 'data.json')
@@ -16,7 +16,10 @@ server.use(
     readOnly: false,
   }),
 )
-server.use(reset)
+
+// list of REST resources to clear on startup
+const clear = ['todos']
+server.use(initJsonServerReset({ db: router.db, clear }))
 server.use(merge)
 server.db = router.db
 server.use(router)

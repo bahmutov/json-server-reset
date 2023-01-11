@@ -41,7 +41,7 @@
     "cy:open:4000": "cypress open --config baseUrl=http://localhost:4000",
     "start": "json-server cypress/fixtures/data.json --middlewares ./src/index.js --middlewares ./src/merge",
     "start:server": "node ./cypress/fixtures/example-server",
-    "watch:server": "node --watch ./cypress/fixtures/example-server",
+    "watch:server": "DEBUG=json-server-reset node --watch ./cypress/fixtures/example-server",
     "e2e": "start-server-and-test 3000 cy:run",
     "dev": "start-server-and-test 3000 cy:open",
     "dev2": "start-test start:server 4000 cy:open:4000",
