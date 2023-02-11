@@ -58,7 +58,7 @@
     "lazy-ass": "2.0.3",
     "license-checker": "25.0.1",
     "mocha": "10.2.0",
-    "prettier": "2.8.3",
+    "prettier": "2.8.4",
     "semantic-release": "20.1.0",
     "start-server-and-test": "1.15.3"
   },
