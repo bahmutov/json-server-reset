@@ -9,7 +9,7 @@ jobs:
 
       - name: Run tests 🧪
         # https://github.com/cypress-io/github-action
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v7.4.3
         with:
           build: npm test
           start: npm start
@@ -18,7 +18,7 @@ jobs:
         run: git checkout ./cypress/fixtures/data.json
 
       - name: Run JSON server tests 🧪
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v7.4.3
         with:
           # we have already installed all dependencies above
           install: false
