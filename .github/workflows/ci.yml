@@ -27,7 +27,7 @@ jobs:
 
       - name: Semantic Release 🚀
         if: github.ref == 'refs/heads/master'
-        uses: cycjimmy/semantic-release-action@v3
+        uses: cycjimmy/semantic-release-action@v6.0.0
         with:
           branch: master
         env:
